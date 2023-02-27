@@ -15,9 +15,6 @@ function App() {
       <Suspense fallback={<h1>User Loading....</h1>}>
         <UserList></UserList>
       </Suspense>
-      <Suspense fallback={<h1>User Loading....</h1>}>
-        <ArticleList />
-      </Suspense>
     </QueryClientProvider>
   );
 }

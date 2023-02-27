@@ -36,9 +36,9 @@ export const UserList = ({ children }) => {
         ))}
       </ul>
       {children}
-      {/* <Suspense fallback={<h1>Article Loading....</h1>}> */}
-      {/* <ArticleList /> */}
-      {/* </Suspense> */}
+      <Suspense fallback={<h1>Article Loading....</h1>}>
+        <ArticleList />
+      </Suspense>
     </>
   );
 };
