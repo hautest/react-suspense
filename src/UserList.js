@@ -1,32 +1,24 @@
 import axios from "axios";
-import { Suspense } from "react";
-import { useQueries, useQuery } from "react-query";
+import { useEffect, useState } from "react";
 import { ArticleList } from "./ArticleList";
 
-const getUserList = async () => {
-  const result = await axios.get(
-    "https://63a6a469f8f3f6d4ab0f5e08.mockapi.io/api/users"
-  );
-
-  return result.data;
-};
-
-const getArticleList = async () => {
-  const result = await axios.get(
-    "https://63a6a469f8f3f6d4ab0f5e08.mockapi.io/api/article"
-  );
-
-  return result.data;
-};
-
 export const UserList = ({ children }) => {
-  const { data } = useQuery("userList", getUserList, {
-    suspense: true,
-  });
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-  // const { data: articleData } = useQuery("articleList", getArticleList, {
-  //   suspense: true,
-  // });
+  useEffect(() => {
+    const getUserList = async () => {
+      const result = await axios.get(
+        "https://63a6a469f8f3f6d4ab0f5e08.mockapi.io/api/users"
+      );
+
+      setLoading(false);
+      setData(result.data);
+    };
+    getUserList();
+  }, []);
+
+  if (loading) return <h1>UserList 로딩중</h1>;
 
   return (
     <>
@@ -35,10 +27,7 @@ export const UserList = ({ children }) => {
           <li key={item.id}>{item.name}</li>
         ))}
       </ul>
-      {children}
-      {/* <Suspense fallback={<h1>Article Loading....</h1>}> */}
-      {/* <ArticleList /> */}
-      {/* </Suspense> */}
+      <ArticleList />
     </>
   );
 };
