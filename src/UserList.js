@@ -1,44 +1,26 @@
-import axios from "axios";
-import { Suspense } from "react";
-import { useQueries, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { ArticleList } from "./ArticleList";
+import { getUserList } from "./api";
+import { Suspense } from "react";
 
-const getUserList = async () => {
-  const result = await axios.get(
-    "https://63a6a469f8f3f6d4ab0f5e08.mockapi.io/api/users"
-  );
-
-  return result.data;
-};
-
-const getArticleList = async () => {
-  const result = await axios.get(
-    "https://63a6a469f8f3f6d4ab0f5e08.mockapi.io/api/article"
-  );
-
-  return result.data;
-};
-
-export const UserList = ({ children }) => {
+export const UserList = () => {
   const { data } = useQuery("userList", getUserList, {
     suspense: true,
   });
-
-  // const { data: articleData } = useQuery("articleList", getArticleList, {
-  //   suspense: true,
-  // });
 
   return (
     <>
       <ul>
         {data?.map((item) => (
-          <li key={item.id}>{item.name}</li>
+          <li key={item.name}>
+            <span>이름은 {item.name}</span>
+            <span>나이는 {item.age}</span>
+          </li>
         ))}
       </ul>
-      {children}
-      <Suspense fallback={<h1>Article Loading....</h1>}>
+      {/* <Suspense fallback={<h1>Article Loading...</h1>}>
         <ArticleList />
-      </Suspense>
+      </Suspense> */}
     </>
   );
 };
