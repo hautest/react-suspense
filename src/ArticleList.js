@@ -22,7 +22,7 @@ export const ArticleList = () => {
   return (
     <ul>
       {data?.map((item) => (
-        <li key={item.id}>{item.title}</li>
+        <li key={item.title}>{item.title}</li>
       ))}
     </ul>
   );

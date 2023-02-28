@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ArticleList } from "./ArticleList";
+import { getUserList } from "./api";
+import { Suspense } from "react";
 
 export const UserList = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -24,7 +26,10 @@ export const UserList = ({ children }) => {
     <>
       <ul>
         {data?.map((item) => (
-          <li key={item.id}>{item.name}</li>
+          <li key={item.name}>
+            <span>이름은 {item.name}</span>
+            <span>나이는 {item.age}</span>
+          </li>
         ))}
       </ul>
       <ArticleList />
