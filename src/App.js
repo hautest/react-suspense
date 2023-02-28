@@ -6,12 +6,8 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<h1>User Loading....</h1>}>
-        <UserList />
-        <Suspense fallback={<h1>Article Loading...</h1>}>
-          <ArticleList />
-        </Suspense>
-      </Suspense>
+      <UserList />
+      <ArticleList />
     </QueryClientProvider>
   );
 }

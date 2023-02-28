@@ -9,15 +9,13 @@ export const UserList = ({ children }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const getUserList = async () => {
-      const result = await axios.get(
-        "https://63a6a469f8f3f6d4ab0f5e08.mockapi.io/api/users"
-      );
-
+    const init = async () => {
+      setLoading(true);
+      const result = await getUserList();
+      setData(result);
       setLoading(false);
-      setData(result.data);
     };
-    getUserList();
+    init();
   }, []);
 
   if (loading) return <h1>UserList 로딩중</h1>;
@@ -32,7 +30,6 @@ export const UserList = ({ children }) => {
           </li>
         ))}
       </ul>
-      <ArticleList />
     </>
   );
 };

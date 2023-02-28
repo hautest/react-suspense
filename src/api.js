@@ -30,6 +30,6 @@ export const getArticleList = () => {
           content: "content4",
         },
       ]);
-    }, 2000);
+    }, 1000);
   });
 };
