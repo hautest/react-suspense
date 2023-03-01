@@ -1,3 +1,5 @@
+import { QueryClient } from "@tanstack/react-query";
+
 export const getUserList = () => {
   console.log("fetch user list");
   return new Promise((resolve) => {
@@ -30,6 +32,14 @@ export const getArticleList = () => {
           content: "content4",
         },
       ]);
-    }, 2000);
+    }, 1000);
   });
 };
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
